@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+<!-- main,test : 对应主类和测试类
+	 application.properties : 指定了配置属性的地方，初始为空
+	 static : 在这个文件夹下,存放任意为浏览器提供服务的静态内容(图片、样式表、JavaScript等)，初始为空
+	 templates : 这个文件夹存放用来渲染内容到浏览器的模板文件，初始为空
+	 pom.xml : Maven构建规范
+	 mvnw,mvnw.cmd : Maven包装器(Wrapper)脚本,借助脚本,即便没有安装Maven,也能构建项目
+	-->
+
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.5.4</version> <!-- Spring Boot版本 -->
+		<relativePath/> <!-- lookup parent from repository -->
+	</parent>
+
+	<groupId>com.example</groupId>
+	<artifactId>taco</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>jar</packaging> <!-- 打包为JAR -->
+	<!-- Java Web应用打包成WAR文件,JAR用于打包库、桌面UI应用,这里打包成JAR是基于云思维做出的选择,所有的Java云平台都能运行可执行的JAR文件 -->
+	<name>taco</name>
+	<description>Taco project for Spring Boot</description>
+
+	<properties>
+		<java.version>1.8</java.version> <!-- JDK版本 -->
+	</properties>
+
+	<dependencies> <!-- Starter的依赖 -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-thymeleaf</artifactId>
+		</dependency> <!-- Spring Boot starter本身不包含库代码，而是传递性拉取其他库 -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+			<scope>runtime</scope>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+	<build>
+		<plugins> <!-- Spring Boot的插件 -->
+			<plugin> <!-- Maven goal插件,用以确保依赖的库包含在JAR文件中，并保证其在类路径下可用 -->
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>
