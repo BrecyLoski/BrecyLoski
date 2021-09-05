@@ -56,13 +56,30 @@
             <artifactId>junit</artifactId>
             <scope>test</scope>
         </dependency>
-    </dependencies>
+        <dependency>
+            <groupId>com.example</groupId>
+            <artifactId>taco</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+		<!-- page 30 -->
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.18.20</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.validation</groupId>
+			<artifactId>validation-api</artifactId>
+			<version>2.0.1.Final</version>
+		</dependency>
+	</dependencies>
 
 	<build>
 		<plugins> <!-- Spring Boot的插件 -->
 			<plugin> <!-- Maven goal插件,用以确保依赖的库包含在JAR文件中，并保证其在类路径下可用 -->
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<version>2.5.4</version>
 			</plugin>
 		</plugins>
 	</build>
