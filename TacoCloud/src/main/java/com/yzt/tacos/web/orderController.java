@@ -31,7 +31,6 @@ public class orderController {
         log.info("Order submitted:" + order);
         return "redirect:/";
         // "redirect:/" --<<Spring in Action>>
-        // 修改成"redirect:/orders/current"避免HTTP 404
     }
 
     @GetMapping("/current")
