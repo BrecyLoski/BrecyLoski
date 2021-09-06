@@ -2,8 +2,9 @@ package com.yzt.tacos;
 
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.Pattern;
+import javax.validation.constraints.NotBlank;
+// import org.hibernate.validator.constraints.NotBlank 下的 @NotBlank 已弃用, 注意区分
 import org.hibernate.validator.constraints.CreditCardNumber;
-import org.hibernate.validator.constraints.NotBlank;
 import lombok.Data;
 
 @Data
