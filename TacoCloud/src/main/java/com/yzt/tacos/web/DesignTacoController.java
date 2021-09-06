@@ -1,13 +1,13 @@
 package com.yzt.tacos.web;
 
 import com.yzt.tacos.Taco;
-import com.yzt.tacos.TacoCloudApplication;
 import com.yzt.tacos.Ingredient;
 import com.yzt.tacos.Ingredient.Type;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.Arrays;
@@ -23,6 +23,7 @@ import java.util.stream.Collectors;
 public class DesignTacoController {
 
     @GetMapping
+    // @GetMapping注解声明showDesignFrom()要处理针对"/design"的HTTP GET请求
     // 细化@RequestMapping,指明当接收到"/design"的HTTP GET请求时,调用showDesignForm()来处理请求
     // @GetMapping自Spring 4.3引入,4.3之前使用:
     // @RequestMapping(method = RequestMethod.GET)代替
@@ -48,6 +49,18 @@ public class DesignTacoController {
         model.addAttribute("design", new Taco());
 
         return "design";
+    }
+
+    @PostMapping
+    //注解声明processDesign()要处理HTTP POST请求
+    public String processDesign(Taco design){
+
+        // Save the taco design
+        // We'll do this in chapter 3
+
+        log.info("Processing design:" + design);
+
+        return "redirect:/orders/current";
     }
 
     private List<Ingredient> filterByType( List<Ingredient> ingredients, Type type){

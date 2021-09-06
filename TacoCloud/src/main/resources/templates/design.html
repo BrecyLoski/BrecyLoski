@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Taco Cloud</title>
-    <link rel ="stylesheet" th:href="@{/styles.css}" />
+    <link rel ="stylesheet" th:href="@{/css/design.css}" />
 </head>
 
 <body>
@@ -22,6 +22,7 @@
                     <span th:text="${ingredient.name}">INGREDIENT</span><br/>
                 </div>
             </div>
+
             <div class="ingredient-group" id="proteins">
                 <h3>Pick your proteins:</h3>
                 <div th:each="ingredient : ${protein}">
@@ -29,6 +30,7 @@
                     <span th:text="${ingredient.name}">INGREDIENT</span><br/>
                 </div>
             </div>
+
             <div class="ingredient-group" id="cheeses">
                 <h3>Choose your cheese:</h3>
                 <div th:each="ingredient : ${cheese}">
@@ -36,6 +38,7 @@
                     <span th:text="${ingredient.name}">INGREDIENT</span><br/>
                 </div>
             </div>
+
             <div class="ingredient-group" id="veggies">
                 <h3>Determine your veggies:</h3>
                 <div th:each="ingredient : ${veggies}">
@@ -43,6 +46,7 @@
                     <span th:text="${ingredient.name}">INGREDIENT</span><br/>
                 </div>
             </div>
+
             <div class="ingredient-group" id="sauces">
                 <h3>Select your sauce:</h3>
                 <div th:each="ingredient : ${sauce}">
@@ -53,6 +57,8 @@
         </div>
 
         <div>
+
+
             <h3>Name your taco creation:</h3>
             <input type="text" th:field="*{name}" />
             <br/>
