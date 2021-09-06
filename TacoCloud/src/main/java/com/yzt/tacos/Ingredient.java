@@ -16,4 +16,16 @@ public class Ingredient {
     public static enum Type {
         WRAP, PROTEIN, VEGGIES, CHESS, SAUCE
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public Type getType() {
+        return type;
+    }
 }

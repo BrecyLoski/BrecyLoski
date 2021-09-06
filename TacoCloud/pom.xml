@@ -23,7 +23,7 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging> <!-- 打包为JAR -->
 	<!-- Java Web应用打包成WAR文件,JAR用于打包库、桌面UI应用,这里打包成JAR是基于云思维做出的选择,所有的Java云平台都能运行可执行的JAR文件 -->
-	<name>Taco</name>
+	<name>TacoCloud</name>
 	<description>Taco project for Spring Boot</description>
 
 	<properties>
