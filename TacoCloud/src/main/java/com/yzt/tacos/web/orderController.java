@@ -2,7 +2,6 @@ package com.yzt.tacos.web;
 
 import javax.validation.Valid;
 
-import com.yzt.tacos.Taco;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -21,7 +20,14 @@ public class orderController {
 
     @PostMapping("/orders")
     // 处理针对"/orders"的HTTP POST 请求
-    public String processOrder(Order order){
+    public String processOrder(@Valid Order order, Errors errors){
+        // @Valid 注解: Spring MVC要对提交的Order对象进行检查
+        // 如果存在校验错误,错误信息将会捕获到一个Errors对象,并作为参数传递给processOrder()
+
+        if(errors.hasErrors()) {
+            return "redirect:/orders/current";
+        } // 检查Errors对象是否包含错误信息
+
         log.info("Order submitted:" + order);
         return "redirect:/orders/current";
         // "redirect:/" --<<Spring in Action>>

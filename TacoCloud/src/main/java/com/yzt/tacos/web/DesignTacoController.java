@@ -3,19 +3,24 @@ package com.yzt.tacos.web;
 import com.yzt.tacos.Taco;
 import com.yzt.tacos.Ingredient;
 import com.yzt.tacos.Ingredient.Type;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import lombok.extern.slf4j.Slf4j;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
+import org.springframework.validation.Errors;
+import javax.validation.Valid;
 
 @Slf4j
-//  Lombok提供的注解,在这个类中自动生成一个SLF4J Logger (SLF4J --Simple Logging Facade for Java)
+//  Lombok提供的注解,在这个类中自动生成一个SLF4J Logger (SLF4J --Simple Logging Facade for Java Logger)
 @Controller
 // 将这个类识别为控制器
 @RequestMapping("/design")
@@ -53,9 +58,15 @@ public class DesignTacoController {
 
     @PostMapping
     //注解声明processDesign()要处理HTTP POST请求
-    public String processDesign(Taco design){
+    public String processDesign(@Valid Taco design, Errors errors){
+        // @Valid 注解: Spring MVC要对提交的Taco对象进行检查
+        // -- 校验在绑定表单数据之后, 调用processDesign()之前
+        // 如果存在校验错误,错误信息将会捕获到一个Errors对象,并作为参数传递给processDesign()
 
-        // Save the taco design
+        if (errors.hasErrors()){
+           return "design";
+        } // 如果Errors对象包含错误信息, return "design" -- 即重新呈现design视图
+
         // We'll do this in chapter 3
 
         log.info("Processing design:" + design);
