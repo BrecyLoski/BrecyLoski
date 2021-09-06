@@ -25,11 +25,11 @@ public class orderController {
         // 如果存在校验错误,错误信息将会捕获到一个Errors对象,并作为参数传递给processOrder()
 
         if(errors.hasErrors()) {
-            return "redirect:/orders/current";
+            return "orderForm";
         } // 检查Errors对象是否包含错误信息
 
         log.info("Order submitted:" + order);
-        return "redirect:/orders/current";
+        return "redirect:/";
         // "redirect:/" --<<Spring in Action>>
         // 修改成"redirect:/orders/current"避免HTTP 404
     }
