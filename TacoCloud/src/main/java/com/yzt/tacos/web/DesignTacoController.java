@@ -35,8 +35,8 @@ public class DesignTacoController {
                 new Ingredient("CARN", "Carnitas", Type.PROTEIN),
                 new Ingredient("TMTO", "Diced Tomatoes", Type.VEGGIES),
                 new Ingredient("LETC", "Lettuce", Type.VEGGIES),
-                new Ingredient("CHED", "Cheddar", Type.CHESS),
-                new Ingredient("JACK", "Monterrey Jack", Type.CHESS),
+                new Ingredient("CHED", "Cheddar", Type.CHEESE),
+                new Ingredient("JACK", "Monterrey Jack", Type.CHEESE),
                 new Ingredient("SLSA", "Salsa", Type.SAUCE),
                 new Ingredient("SRCR", "Sour Cream", Type.SAUCE)
         );

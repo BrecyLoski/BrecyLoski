@@ -23,7 +23,9 @@ public class orderController {
     // 处理针对"/orders"的HTTP POST 请求
     public String processOrder(Order order){
         log.info("Order submitted:" + order);
-        return "redirect:/orders/current"; // redirect: 重定位
+        return "redirect:/orders/current";
+        // "redirect:/" --<<Spring in Action>>
+        // 修改成"redirect:/orders/current"避免HTTP 404
     }
 
     @GetMapping("/current")
