@@ -1,11 +1,11 @@
 package com.yzt.tacos;
 
+import lombok.Data;
+import org.hibernate.validator.constraints.CreditCardNumber;
 import javax.validation.constraints.Digits;
-import javax.validation.constraints.Pattern;
 import javax.validation.constraints.NotBlank;
 // import org.hibernate.validator.constraints.NotBlank 下的 @NotBlank 已弃用, 注意区分
-import org.hibernate.validator.constraints.CreditCardNumber;
-import lombok.Data;
+import javax.validation.constraints.Pattern;
 
 @Data
 public class Order {

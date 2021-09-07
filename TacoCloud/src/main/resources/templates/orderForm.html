@@ -9,7 +9,8 @@
 </head>
 
 <body>
-    <form method="post" th:action="@{/orders}" th:object="${order}">
+    <form method="post" th:action="@{orders}" th:object="${order}">
+        <!-- 为了查看数据,暂时删掉th:action="@{/orders}" -->
         <h1>Order your taco creations!</h1>
 
         <img th:src="@{/images/TacoCloud.png}"/>
@@ -45,6 +46,8 @@
         <h3>Here's how I pay ...</h3>
         <label for="ccNumber">Credit Card #:</label>
         <input type="text" th:field="*{ccNumber}" />
+        <span class="validationError" th:if="${#fields.hasErrors('ccNumber')}"
+              th:errors="*{ccNumber}">CC Num Error</span>
         <br/>
 
         <label for="ccExpiration">Expiration:</label>
