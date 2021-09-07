@@ -1,6 +1,5 @@
 package com.yzt.tacos;
 
-import com.yzt.tacos.HomeController;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +11,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @RunWith(SpringRunner.class)
- @WebMvcTest(HomeController.class)
+ @WebMvcTest() // page 49: 从 @WebMvcTest 移除了对 HomeController 的引用
  // 针对HomeController的Web测试,
  // 测试在Spring MVC应用的上下文中执行(Spring Boot提供的特殊测试注解),
  // 为测试Spring Mvc应用提供Spring环境的支持

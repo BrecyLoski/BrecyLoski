@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 @RequestMapping(value = "/orders", method = RequestMethod.POST)
 // 指明这个控制器的请求处理方法都会处理路径以"/orders"开头的请求
-public class orderController {
+public class OrderController {
 
     @GetMapping("/current")
     // 处理针对"/orders/current"的HTTP GET请求
