@@ -37,10 +37,14 @@
 
         <label for="state">State:</label>
         <input type="text" th:field="*{state}" />
+        <span class="validationError" th:if="${#fields.hasErrors('state')}"
+              th:errors="*{state}">State Error</span>
         <br/>
 
         <label for="zip">Zip:</label>
         <input type="text" th:field="*{zip}" />
+        <span class="validationError" th:if="${#fields.hasErrors('zip')}"
+              th:errors="*{zip}">Zip Error</span>
         <br/>
 
         <h3>Here's how I pay ...</h3>
@@ -52,10 +56,14 @@
 
         <label for="ccExpiration">Expiration:</label>
         <input type="text" th:field="*{ccExpiration}" />
+        <span class="validationError" th:if="${#fields.hasErrors('ccExpiration')}"
+              th:errors="*{ccExpiration}">CC Expiration Error</span>
         <br/>
 
         <label for="ccCVV">CVV:</label>
         <input type="text" th:field="*{ccCVV}" />
+        <span class="validationError" th:if="${#fields.hasErrors('ccCVV')}"
+              th:errors="*{ccCVV}">CcCVV Error</span>
         <br/>
 
         <input type="submit" value="Submit order" />
