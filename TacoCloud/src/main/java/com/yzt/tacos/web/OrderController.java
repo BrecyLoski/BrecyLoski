@@ -1,15 +1,12 @@
 package com.yzt.tacos.web;
 
-import javax.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 import lombok.extern.slf4j.Slf4j;
 import com.yzt.tacos.Order;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 @Slf4j
 // 在运行期创建一个SLF4J logger对象
@@ -29,7 +26,7 @@ public class OrderController {
 
     @PostMapping("/orders")
     // 处理针对"/orders"的HTTP POST 请求
-    public String processOrder(@Valid Order order, Errors errors){
+    public String processOrder(@RequestBody @Validated(value = Order.class) Order order, Errors errors){
         // @Valid 注解: Spring MVC要对提交的Order对象进行检查
         // 如果存在校验错误,错误信息将会捕获到一个Errors对象,并作为参数传递给processOrder()
 
