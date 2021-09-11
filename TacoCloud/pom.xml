@@ -5,45 +5,41 @@
           http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-<!-- main,test : 对应主类和测试类
-	 application.properties : 指定了配置属性的地方，初始为空
-	 static : 在这个文件夹下,存放任意为浏览器提供服务的静态内容(图片、样式表、JavaScript等)，初始为空
-	 templates : 这个文件夹存放用来渲染内容到浏览器的模板文件，初始为空
-	 pom.xml : Maven构建规范
-	 mvnw,mvnw.cmd : Maven包装器(Wrapper)脚本,借助脚本,即便没有安装Maven,也能构建项目
-	-->
+	<groupId>sia</groupId>
+	<artifactId>taco-cloud</artifactId>
+	<version>0.0.2-SNAPSHOT</version>
+	<packaging>jar</packaging>
+
+	<name>taco-cloud</name>
+	<description>Taco Cloud Example</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.5.4</version> <!-- Spring Boot版本 -->
+		<version>2.4.2</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 
-	<groupId>com.example</groupId>
-	<artifactId>TacoCloud</artifactId>
-	<version>0.0.2-SNAPSHOT</version>
-	<packaging>jar</packaging> <!-- 打包为JAR -->
-	<!-- Java Web应用打包成WAR文件,JAR用于打包库、桌面UI应用,这里打包成JAR是基于云思维做出的选择,所有的Java云平台都能运行可执行的JAR文件 -->
-
-	<name>TacoCloud</name>
-	<description>Taco project for Spring Boot</description>
-
 	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		<java.version>1.8</java.version> <!-- JDK版本 -->
+		<project.build.sourceEncoding>
+			UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>
+			UTF-8</project.reporting.outputEncoding>
+		<java.version>1.8</java.version>
 	</properties>
 
-	<dependencies> <!-- Starter的依赖 -->
+	<dependencies>
+		<!-- tag::thymeleaf[] -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
-		</dependency> <!-- Spring Boot starter本身不包含库代码，而是传递性拉取其他库 -->
+		</dependency>
+		<!-- end::thymeleaf[] -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
@@ -76,10 +72,15 @@
 		</dependency>
 
 		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-validation</artifactId>
 		</dependency>
-
 		<dependency>
 			<groupId>org.junit.vintage</groupId>
 			<artifactId>junit-vintage-engine</artifactId>
@@ -91,35 +92,14 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <scope>test</scope>
-        </dependency>
-		<dependency>
-			<groupId>javax.validation</groupId>
-			<artifactId>validation-api</artifactId>
-			<version>2.0.1.Final</version>
-		</dependency>
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-validator</artifactId>
-			<version>5.2.0.Final</version>
-		</dependency>
-		<dependency>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
-			<version>1.18.20</version>
-		</dependency>
-
 	</dependencies>
 
 	<build>
-		<plugins> <!-- Spring Boot的插件 -->
-			<plugin> <!-- Maven goal插件,用以确保依赖的库包含在JAR文件中，并保证其在类路径下可用 -->
+		<plugins>
+			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<version>2.4.2</version>
 			</plugin>
 		</plugins>
 	</build>

@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html lang="en"
-        xmlns="http://www.w3.org/1999/xhtml"
-        xmlns:th="http://www.thymeleaf.org">
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta content="application/x-www-form-urlencoded" charset="UTF-8">
     <title>Taco Cloud</title>
-    <link rel="stylesheet" th:href="@{/css/styles.css}" />
+    <link rel="stylesheet" th:href="@{css/styles.css}" />
 </head>
 
 <body>
-    <form method="POST" th:action="@{orders}" th:object="${order}">
+    <form method="POST" th:action="@{/orders}" th:object="${order}">
+
         <h1>Order your taco creations!</h1>
 
         <img th:src="@{/images/TacoCloud.png}"/>
