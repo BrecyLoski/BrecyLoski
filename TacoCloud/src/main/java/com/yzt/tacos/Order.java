@@ -6,6 +6,7 @@ import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
 // import org.hibernate.validator.constraints.NotBlank 下的 @NotBlank 已弃用, 注意区分
 import javax.validation.constraints.Pattern;
+import java.util.Date;
 
 @Data
 public class Order {
@@ -37,4 +38,8 @@ public class Order {
     @Digits(integer = 3, fraction = 0, message = "Invalid CVV")
     // "Digit - 数字/位", 确保包含3个整数, 并且没有分数
     private String ccCVV;
+
+    private Long id;
+
+    private Date placeAt;
 }

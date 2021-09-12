@@ -3,10 +3,15 @@ package com.yzt.tacos.web;
 import com.yzt.tacos.Taco;
 import com.yzt.tacos.Ingredient;
 import com.yzt.tacos.Ingredient.Type;
+
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import com.yzt.tacos.data.IngredientRepository;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -20,28 +25,14 @@ import javax.validation.Valid;
 // 将这个类识别为控制器
 @RequestMapping("/design")
 // 指定处理器所处理的请求类型
+@SessionAttributes("order")
 public class DesignTacoController {
 
-    @ModelAttribute
-    public void addIngredientsToModel(Model model) {
-        List<Ingredient> ingredients = Arrays.asList(
-                new Ingredient("FLTO", "Flour Tortilla", Type.WRAP),
-                new Ingredient("COTO", "Corn Tortilla", Type.WRAP),
-                new Ingredient("GRBF", "Ground Beef", Type.PROTEIN),
-                new Ingredient("CARN", "Carnitas", Type.PROTEIN),
-                new Ingredient("TMTO", "Diced Tomatoes", Type.VEGGIES),
-                new Ingredient("LETC", "Lettuce", Type.VEGGIES),
-                new Ingredient("CHED", "Cheddar", Type.CHEESE),
-                new Ingredient("JACK", "Monterrey Jack", Type.CHEESE),
-                new Ingredient("SLSA", "Salsa", Type.SAUCE),
-                new Ingredient("SRCR", "Sour Cream", Type.SAUCE)
-        );
+    private final IngredientRepository ingredientRepo;
 
-        Type[] types = Ingredient.Type.values();
-        for (Type type : types) {
-            model.addAttribute(type.toString().toLowerCase(),
-                    filterByType(ingredients, type));
-        }
+    @Autowired
+    public DesignTacoController(IngredientRepository ingredientRepo){
+        this.ingredientRepo = ingredientRepo;
     }
 
     @GetMapping
@@ -50,7 +41,16 @@ public class DesignTacoController {
     // @GetMapping自Spring 4.3引入,4.3之前使用:
     // @RequestMapping(method = RequestMethod.GET)代替
     public String showDesignForm(Model model) {
-        model.addAttribute("design", new Taco());
+        List<Ingredient> ingredients = new ArrayList<>();
+        ingredientRepo.findAll().forEach(i -> ingredients.add(i));
+        //调用注入的IngredientRepository是findAll(),从数据库获取所有的配料
+
+        Type[] types = Ingredient.Type.values();
+        for(Type type : types){ //将获取到的配料过滤成不同类型然后放到模型中
+            model.addAttribute(type.toString().toLowerCase(),
+                    filterByType(ingredients, type));
+        }
+
         return "design";
     }
 
