@@ -1,16 +1,16 @@
 package com.yzt.tacos.web;
 
+import com.yzt.tacos.Order;
 import com.yzt.tacos.Taco;
 import com.yzt.tacos.Ingredient;
 import com.yzt.tacos.Ingredient.Type;
+import com.yzt.tacos.data.IngredientRepository;
+import com.yzt.tacos.data.TacoRepository;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import com.yzt.tacos.data.IngredientRepository;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,8 +19,8 @@ import org.springframework.validation.Errors;
 
 import javax.validation.Valid;
 
-@Slf4j
-//  Lombok提供的注解,在这个类中自动生成一个SLF4J Logger (SLF4J --Simple Logging Facade for Java Logger)
+//@Slf4j
+//Lombok提供的注解,在这个类中自动生成一个SLF4J Logger (SLF4J --Simple Logging Facade for Java Logger)
 @Controller
 // 将这个类识别为控制器
 @RequestMapping("/design")
@@ -30,9 +30,22 @@ public class DesignTacoController {
 
     private final IngredientRepository ingredientRepo;
 
-    @Autowired
-    public DesignTacoController(IngredientRepository ingredientRepo){
+    private TacoRepository designRepo;
+
+    @Autowired //构造器 将得到的对象赋值给实例变量
+    public DesignTacoController(IngredientRepository ingredientRepo, TacoRepository designRepo){
         this.ingredientRepo = ingredientRepo;
+        this.designRepo = designRepo;
+    }
+
+    @ModelAttribute(name = "order")
+    public Order order(){
+        return new Order();
+    }
+
+    @ModelAttribute(name = "Taco")
+    public Taco taco(){
+        return new Taco();
     }
 
     @GetMapping
@@ -42,7 +55,7 @@ public class DesignTacoController {
     // @RequestMapping(method = RequestMethod.GET)代替
     public String showDesignForm(Model model) {
         List<Ingredient> ingredients = new ArrayList<>();
-        ingredientRepo.findAll().forEach(i -> ingredients.add(i));
+        ingredientRepo.findAll().forEach(ingredients::add);
         //调用注入的IngredientRepository是findAll(),从数据库获取所有的配料
 
         Type[] types = Ingredient.Type.values();
@@ -56,7 +69,7 @@ public class DesignTacoController {
 
     @PostMapping
     //注解声明processDesign()要处理HTTP POST请求
-    public String processDesign(@Valid @ModelAttribute("design") Taco design, Errors errors, Model model){
+    public String processDesign(@Valid Taco design, Errors errors, @ModelAttribute Order order){
         // @Valid 注解: Spring MVC要对提交的Taco对象进行检查
         // -- 校验在绑定表单数据之后, 调用processDesign()之前
         // 如果存在校验错误,错误信息将会捕获到一个Errors对象,并作为参数传递给processDesign()
@@ -65,9 +78,8 @@ public class DesignTacoController {
            return "design";
         } // 如果Errors对象包含错误信息, return "design" -- 即重新呈现design视图
 
-        // do this in chapter 3
-
-        log.info("Processing design:" + design);
+        Taco saved = designRepo.save(design);
+        order.addDesign(saved);
 
         return "redirect:/orders/current";
     }
