@@ -23,7 +23,7 @@ public class Order {
     private String deliveryStreet;
 
     @NotBlank(message = "City is required")
-    private String deliverCity;
+    private String deliveryCity;
 
     @NotBlank(message = "State is required")
     private String deliveryState;
