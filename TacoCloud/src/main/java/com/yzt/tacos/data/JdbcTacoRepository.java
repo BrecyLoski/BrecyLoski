@@ -28,6 +28,9 @@ public class JdbcTacoRepository implements TacoRepository{
 
     @Override
     public Taco save(Taco taco) {
+         /* save()首先调用私有的saveTacoInfo() --该方法返回一个taco ID;
+         * 再调用saveIngredientToTaco()来保存配料信息
+         * */
         long tacoId = saveTacoInfo(taco);
         taco.setId(tacoId);
         for(Ingredient ingredient : taco.getIngredients()){
@@ -37,8 +40,13 @@ public class JdbcTacoRepository implements TacoRepository{
         return taco;
     }
 
+    // 获取 taco Id:
     private long saveTacoInfo(Taco taco){
         taco.setCreatedAt(new Date());
+        /* 创建 PreparedStatementCreator:
+        * 首先创建 PreparedStatementCreatorFactory,并将要执行的SQL传递给它, 同时包含查询参数类型;
+        * 然后调用 工厂类的newPreparedStatementCreator(), 并将查询参数所需的值传递进来;
+        * */
         PreparedStatementCreator psc =
                 new PreparedStatementCreatorFactory(
                         "insert into Taco (name, createdAt) values (?, ?)",
@@ -51,11 +59,19 @@ public class JdbcTacoRepository implements TacoRepository{
                 );
         KeyHolder keyHolder = new GeneratedKeyHolder();
         jdbc.update(psc, keyHolder);
+        /* update()需要接受一个PreparedStatementCreator和一个KeyHolder
+        * KeyHolder将会提供生成的TacoID
+        * PreparedStatementCreator提供执行的SQL, 参数类型, 值
+        * 为了使用该方法必须创建一个PreparedStatementCreator
+        * */
 
-        return keyHolder.getKey().longValue();
+        return keyHolder.getKey().longValue(); // 返回taco的ID
     }
 
     private void saveIngredientToTaco(Ingredient ingredient, long tacoId){
+        /* 这个update()无法获取到数据库生成的taco ID, 其以参数形式传入;
+        * 这里的update()以更简单的形式将配料信息保存到Taco_Ingredients表中;
+        * */
         jdbc.update(
                 "insert into Taco_Ingredients(taco, ingredient) values(?, ?)",
                 tacoId, ingredient.getId()

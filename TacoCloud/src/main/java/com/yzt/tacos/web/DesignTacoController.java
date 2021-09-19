@@ -31,7 +31,7 @@ public class DesignTacoController {
 
     private final IngredientRepository ingredientRepo;
 
-    private TacoRepository designRepo;
+    private final TacoRepository designRepo;
 
     @Autowired //构造器 将得到的对象赋值给实例变量
     public DesignTacoController(IngredientRepository ingredientRepo, TacoRepository designRepo){
@@ -39,12 +39,12 @@ public class DesignTacoController {
         this.designRepo = designRepo;
     }
 
-    @ModelAttribute(name = "order") // 表明它的值应该是来自模型的
+    @ModelAttribute(name = "order") // 确保会在模型中创建一个Order对象
     public Order order(){
         return new Order();
     }
 
-    @ModelAttribute(name = "taco") // 表明它的值应该是来自模型的
+    @ModelAttribute(name = "taco") // 确保会在模型中创建一个Taco对象
     public Taco taco(){
         return new Taco();
     }
@@ -52,15 +52,15 @@ public class DesignTacoController {
     @GetMapping
     // @GetMapping注解声明showDesignFrom()要处理针对"/design"的HTTP GET请求
     // 细化@RequestMapping,指明当接收到"/design"的HTTP GET请求时,调用showDesignForm()来处理请求
-    // @GetMapping自Spring 4.3引入,4.3之前使用:
-    // @RequestMapping(method = RequestMethod.GET)代替
+    // @GetMapping自Spring 4.3引入,4.3之前使用@RequestMapping(method = RequestMethod.GET)代替
     public String showDesignForm(Model model) {
         List<Ingredient> ingredients = new ArrayList<>();
-        ingredientRepo.findAll().forEach(ingredients::add);
-        //调用注入的IngredientRepository是findAll(),从数据库获取所有的配料
+        ingredientRepo.findAll().forEach(i -> ingredients.add(i));
+        //调用注入的IngredientRepository是findAll(), 从数据库获取所有的配料
 
+        //将获取到的配料过滤成不同类型然后放到模型中
         Type[] types = Ingredient.Type.values();
-        for(Type type : types){ //将获取到的配料过滤成不同类型然后放到模型中
+        for(Type type : types){
             model.addAttribute(type.toString().toLowerCase(),
                     filterByType(ingredients, type));
         }
@@ -73,6 +73,7 @@ public class DesignTacoController {
     public String processDesign(@Valid Taco design, Errors errors, @ModelAttribute Order order){
         /* @Valid 注解: Spring MVC要对提交的Taco对象进行检查,校验在绑定表单数据之后, 调用processDesign()之前
            如果存在校验错误,错误信息将会捕获到一个Errors对象,并作为参数传递给processDesign() */
+        /* @ModelAttribute 注解: 表明Order对象的值应该是来自模型的, SpringMVC不会将请求参数绑定到它上面 */
 
         if (errors.hasErrors()){ // 如果Errors对象包含错误信息, return "design" -- 即重新呈现design视图
            return "design";
