@@ -4,6 +4,7 @@ package com.yzt.tacos.web;
 import javax.validation.Valid;
 
 import com.yzt.tacos.data.OrderRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -18,10 +19,12 @@ import org.springframework.web.bind.support.SessionStatus;
 @RequestMapping(value = "/orders")
 // 指明这个控制器的请求处理方法都会处理路径以"/orders"开头的请求
 @SessionAttributes("order")
+// 指定模型对象(如订单属性)要保存在session中, 这样才能跨请求使用
 public class OrderController {
 
     private OrderRepository orderRepo;
 
+    @Autowired
     public OrderController(OrderRepository orderRepo){
         this.orderRepo = orderRepo;
     }
@@ -47,7 +50,9 @@ public class OrderController {
 
         //log.info("Order submitted:" + order);
         orderRepo.save(order);
+        // 表单提交的Order对象(同时也session中持有的Object对象)通过注入的OrderRepository的save()保存
         sessionStatus.setComplete();
+        // 调用SessionStatus的setComplete()方法重置session
         return "redirect:/";
         // "redirect:/" --<<Spring in Action>>
     }

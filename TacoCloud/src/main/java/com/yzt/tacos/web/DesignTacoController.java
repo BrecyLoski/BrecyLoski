@@ -26,6 +26,7 @@ import javax.validation.Valid;
 @RequestMapping("/design")
 // 指定处理器所处理的请求类型
 @SessionAttributes("order")
+// 指定模型对象(如订单属性)要保存在session中, 这样才能跨请求使用
 public class DesignTacoController {
 
     private final IngredientRepository ingredientRepo;
@@ -38,12 +39,12 @@ public class DesignTacoController {
         this.designRepo = designRepo;
     }
 
-    @ModelAttribute(name = "order")
+    @ModelAttribute(name = "order") // 表明它的值应该是来自模型的
     public Order order(){
         return new Order();
     }
 
-    @ModelAttribute(name = "taco")
+    @ModelAttribute(name = "taco") // 表明它的值应该是来自模型的
     public Taco taco(){
         return new Taco();
     }
@@ -70,14 +71,18 @@ public class DesignTacoController {
     @PostMapping
     //注解声明processDesign()要处理HTTP POST请求
     public String processDesign(@Valid Taco design, Errors errors, @ModelAttribute Order order){
-        // @Valid 注解: Spring MVC要对提交的Taco对象进行检查
-        // -- 校验在绑定表单数据之后, 调用processDesign()之前
-        // 如果存在校验错误,错误信息将会捕获到一个Errors对象,并作为参数传递给processDesign()
+        /* @Valid 注解: Spring MVC要对提交的Taco对象进行检查,校验在绑定表单数据之后, 调用processDesign()之前
+           如果存在校验错误,错误信息将会捕获到一个Errors对象,并作为参数传递给processDesign() */
 
-        if (errors.hasErrors()){
+        if (errors.hasErrors()){ // 如果Errors对象包含错误信息, return "design" -- 即重新呈现design视图
            return "design";
-        } // 如果Errors对象包含错误信息, return "design" -- 即重新呈现design视图
+        }
 
+        /* 检查完校验错误之后,processDesign()使用注入的TacoRepository来保存Taco,
+           Taco对象保存在Session里面的Order中,
+           在用户提交表单之前, Order对象会一直保存在Session中, 并没有保存到数据库中,
+           到时, orderController调用OrderController的实现来保存订单
+         */
         Taco saved = designRepo.save(design);
         order.addDesign(saved);
 

@@ -5,6 +5,7 @@ import java.sql.Types;
 import java.util.Arrays;
 import java.util.Date;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.core.PreparedStatementCreatorFactory;
@@ -20,6 +21,7 @@ public class JdbcTacoRepository implements TacoRepository{
 
     private JdbcTemplate jdbc;
 
+    @Autowired
     public JdbcTacoRepository(JdbcTemplate jdbc){
         this.jdbc = jdbc;
     }
