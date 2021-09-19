@@ -34,7 +34,8 @@ public class Order {
     @CreditCardNumber(message = "Not a valid credit card number")
     private String ccNumber;
 
-    @Pattern(message = "Must be formatted MM/YY", regexp = "^ (0[1-9]|1[0-2]) ([\\/]) ([1-9][0-9]) $")
+    @Pattern(regexp="^(0[1-9]|1[0-2])([\\/])([1-9][0-9])$",
+             message = "Must be formatted MM/YY")
     // "Pattern - 样式", 使用正则表达式, 确保其符合预期的格式
     private String ccExpiration;
 

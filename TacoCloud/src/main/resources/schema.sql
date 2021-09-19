@@ -24,7 +24,7 @@ create table if not exists Taco_Order(
     deliveryState varchar(2) not null,
     deliveryZip varchar(10) not null,
     ccNumber varchar(16) not null,
-    ccExpiration varchar(3) not null,
+    ccExpiration varchar(52) not null,
     ccCVV varchar(3) not null,
     placeAt timestamp not null);
 
