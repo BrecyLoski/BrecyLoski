@@ -5,15 +5,31 @@ import lombok.Data;
 import org.hibernate.validator.constraints.CreditCardNumber;
 import org.hibernate.validator.constraints.NotBlank;
 
+import javax.persistence.*;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.Pattern;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 @Data
-public class Order {
+@Entity
+@Table(name = "Taco_Order")
+/*
+* @Table注解:
+* 表明Order实体应该持久化到数据库中名为Taco_Order的表中
+* */
+public class Order implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
+    @Id // @Id注解: 将其指定为数据库中唯一标识该实体的属性
+    @GeneratedValue (strategy = GenerationType.AUTO) // 依赖数据库自动生成的ID值
+    private Long id;
+
+    private Date placeAt;
 
     @NotBlank(message = "Name is required")
     // 不使用@NotNull, 因为" "即不为空, @NotBlank表示不能为 空白字段
@@ -43,13 +59,17 @@ public class Order {
     // "Digit - 数字/位", 确保包含3个整数, 并且没有分数
     private String ccCVV;
 
-    private Long id;
-
-    private Date placeAt;
-
+    @ManyToMany(targetEntity = Taco.class)
+    // 声明Order与其关联的Taco之间的关系
     private List<Taco> tacos = new ArrayList<>();
 
     public void addDesign(Taco design) {
         this.tacos.add(design);
+    }
+
+    @PrePersist
+    // 在持久化之前, 使用placedAt()设置当前日期和时间
+    void placedAt() {
+        this.placeAt = new Date();
     }
 }
