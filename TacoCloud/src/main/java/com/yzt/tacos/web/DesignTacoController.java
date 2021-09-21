@@ -30,13 +30,12 @@ import javax.validation.Valid;
 public class DesignTacoController {
 
     private final IngredientRepository ingredientRepo;
-
-    private final TacoRepository designRepo;
+    private TacoRepository tacoRepo;
 
     @Autowired //构造器 将得到的对象赋值给实例变量
-    public DesignTacoController(IngredientRepository ingredientRepo, TacoRepository designRepo){
+    public DesignTacoController(IngredientRepository ingredientRepo, TacoRepository tacoRepo){
         this.ingredientRepo = ingredientRepo;
-        this.designRepo = designRepo;
+        this.tacoRepo = tacoRepo;
     }
 
     @ModelAttribute(name = "order") // 确保会在模型中创建一个Order对象
@@ -84,7 +83,7 @@ public class DesignTacoController {
            在用户提交表单之前, Order对象会一直保存在Session中, 并没有保存到数据库中,
            到时, orderController调用OrderController的实现来保存订单
          */
-        Taco saved = designRepo.save(design);
+        Taco saved = tacoRepo.save(design);
         order.addDesign(saved);
 
         return "redirect:/orders/current";

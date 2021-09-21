@@ -5,9 +5,9 @@
           http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>sia</groupId>
+	<groupId>jpa</groupId>
 	<artifactId>taco-cloud</artifactId>
-	<version>0.0.3-SNAPSHOT</version>
+	<version>0.0.4-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<name>taco-cloud</name>
