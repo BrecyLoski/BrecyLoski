@@ -1,7 +1,7 @@
-package com.yzt.tacos.web;
+package yzt.com.tacos.web;
 
-import com.yzt.tacos.Ingredient;
-import com.yzt.tacos.data.IngredientRepository;
+import yzt.com.tacos.data.IngredientRepository;
+import yzt.com.tacos.Ingredient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;

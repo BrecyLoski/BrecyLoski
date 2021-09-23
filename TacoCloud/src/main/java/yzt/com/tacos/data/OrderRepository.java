@@ -1,6 +1,6 @@
-package com.yzt.tacos.data;
+package yzt.com.tacos.data;
 
-import com.yzt.tacos.Order;
+import yzt.com.tacos.Order;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;

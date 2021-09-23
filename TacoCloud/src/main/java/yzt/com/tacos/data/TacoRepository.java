@@ -1,6 +1,6 @@
-package com.yzt.tacos.data;
+package yzt.com.tacos.data;
 
-import com.yzt.tacos.Taco;
+import yzt.com.tacos.Taco;
 import org.springframework.data.repository.CrudRepository;
 
 /* CrudRepository<Taco, Long>:

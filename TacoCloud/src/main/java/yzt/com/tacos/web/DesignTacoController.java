@@ -1,16 +1,16 @@
-package com.yzt.tacos.web;
+package yzt.com.tacos.web;
 
-import com.yzt.tacos.Order;
-import com.yzt.tacos.Taco;
-import com.yzt.tacos.Ingredient;
-import com.yzt.tacos.Ingredient.Type;
-import com.yzt.tacos.data.IngredientRepository;
+import yzt.com.tacos.Order;
+import yzt.com.tacos.Taco;
+import yzt.com.tacos.Ingredient;
+import yzt.com.tacos.Ingredient.Type;
+import yzt.com.tacos.data.IngredientRepository;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import com.yzt.tacos.data.TacoRepository;
+import yzt.com.tacos.data.TacoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

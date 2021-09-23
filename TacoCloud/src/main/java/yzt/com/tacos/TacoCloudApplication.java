@@ -1,6 +1,6 @@
-package com.yzt.tacos;
+package yzt.com.tacos;
 
-import com.yzt.tacos.data.IngredientRepository;
+import yzt.com.tacos.data.IngredientRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

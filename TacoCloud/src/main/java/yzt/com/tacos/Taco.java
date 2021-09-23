@@ -1,4 +1,4 @@
-package com.yzt.tacos;
+package yzt.com.tacos;
 
 import java.util.Date;
 import java.util.List;

@@ -1,7 +1,7 @@
-package com.yzt.tacos.data;
+package yzt.com.tacos.data;
 
 import org.springframework.data.repository.CrudRepository;
-import com.yzt.tacos.Ingredient;
+import yzt.com.tacos.Ingredient;
 
 /* CrudRepository<Ingredient, String>:
 * 第一个参数是要持久化的实体类型,

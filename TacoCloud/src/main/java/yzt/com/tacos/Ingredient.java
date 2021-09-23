@@ -1,4 +1,4 @@
-package com.yzt.tacos;
+package yzt.com.tacos;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
