@@ -20,7 +20,7 @@ import javax.sql.DataSource;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired // 自动装配
-    DataSource dataSource;
+    //DataSource dataSource;
     private UserDetailsService userDetailsService;
 
     @Override
