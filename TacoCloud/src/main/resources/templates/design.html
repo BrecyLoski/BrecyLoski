@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="en"
         xmlns="http://www.w3.org/1999/xhtml"
@@ -12,9 +10,14 @@
 
 <body>
     <h1>Design your taco!</h1>
+    <h2>Feelin' hungry, <span th:text="${user.fullname}">NAME</span>?</h2>
     <img th:src="@{/images/TacoCloud.png}" />
 
-    <form method="POST" th:object="${taco}">
+    <form method="POST" th:action="@{/logout}" id="logoutForm">
+        <input type="submit" value="Logout"/>
+    </form>
+
+    <form method="POST" th:object="${design}" th:action="@{/design}" id="tacoForm">
 
         <!-- tag::all[] -->
         <span class="validationError"
@@ -33,7 +36,7 @@
             </div>
 
             <div class="ingredient-group" id="proteins">
-                <h3>Pick your proteins:</h3>
+                <h3>Pick your protein:</h3>
                 <div th:each="ingredient : ${protein}">
                     <input name="ingredients" type="checkbox" th:value="${ingredient.id}" />
                     <span th:text="${ingredient.name}">INGREDIENT</span><br/>

@@ -3,6 +3,8 @@ package yzt.com.tacos.web;
 
 import javax.validation.Valid;
 
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import yzt.com.tacos.User;
 import yzt.com.tacos.data.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -40,13 +42,18 @@ public class OrderController {
 
     @PostMapping
     // 处理针对"/orders"的HTTP POST 请求
-    public String processOrder(@Valid Order order, Errors errors, SessionStatus sessionStatus){
+    public String processOrder(@Valid Order order,
+                               Errors errors,
+                               SessionStatus sessionStatus,
+                               @AuthenticationPrincipal User user){
         // @Valid 注解: Spring MVC要对提交的Order对象进行检查
         // 如果存在校验错误,错误信息将会捕获到一个Errors对象,并作为参数传递给processOrder()
 
         if(errors.hasErrors()) {
             return "orderForm";
         } // 检查Errors对象是否包含错误信息
+
+        order.setUser(user);
 
         //log.info("Order submitted:" + order);
         orderRepo.save(order);

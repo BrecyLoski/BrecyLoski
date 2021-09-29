@@ -31,6 +31,9 @@ public class Order implements Serializable {
 
     private Date placeAt;
 
+    @ManyToOne
+    User user;
+
     @NotBlank(message = "Name is required")
     // 不使用@NotNull, 因为" "即不为空, @NotBlank表示不能为 空白字段
     private String deliveryName;
