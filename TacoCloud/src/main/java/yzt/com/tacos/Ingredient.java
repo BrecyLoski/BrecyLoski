@@ -37,15 +37,4 @@ public class Ingredient {
         WRAP, PROTEIN, VEGGIES, CHEESE, SAUCE
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public Type getType() {
-        return type;
-    }
 }
