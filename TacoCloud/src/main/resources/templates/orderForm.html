@@ -24,6 +24,10 @@
             </span>
         </div>
 
+        <form method="POST" th:action="@{/logout}" id="logoutForm">
+            <input type="submit" value="Logout"/>
+        </form>
+
         <h3>Deliver my taco masterpieces to ...</h3>
         <label for="deliveryName">Name:</label>
         <input type="text" th:field="*{deliveryName}"/>

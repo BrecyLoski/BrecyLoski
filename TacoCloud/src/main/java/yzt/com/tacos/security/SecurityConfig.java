@@ -24,42 +24,40 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private UserDetailsService userDetailsService;
 
     @Override
+    // 配置HttpSecurity  ---拦截请求以确保用户具备适当的权限
     protected void configure(HttpSecurity http) throws Exception {
-            http.authorizeRequests()
-                .antMatchers("/design", "/orders")
-                .access("hasRole('ROLE_USER')")
-                .antMatchers("/", "/**").access("permitAll")
-                //end::authorizeRequests[]
 
-                .and()
-                .formLogin()
-                .loginPage("/login")
-                //end::customLoginPage[]
+        http.authorizeRequests()
+                /* 返回一个对象(ExpressionInterceptUrlRegisty)
+                 * 基于此对象可以指定URL路径和这些路径的安全需求
+                 * */
+                .antMatchers("/design", "/orders")// 确保只有认证过的用户(具有ROLE_USER权限),才能发起对"/design","/orders"的请求
+                .access("hasRole('ROLE_USER')")// 使用access()方法,通过为其提供SpEL表达式来声明更丰富的安全规则
+                .antMatchers("/", "/**")// 其它请求对所有用户均可用
+                .access("permitAll")
 
-                // tag::enableLogout[]
+                .and() // 返回一个HttpSecurityBuilder对象
+                // and()表明完成授权相关的配置,并要添加一些其它的HTTP配置
+                .formLogin() // 替换默认的登录页
+                .loginPage("/login") // 声明自定义登录页的路径
+                // 当Spring Security断定用户没有认证并且需要认证的时候,它会将用户重定向到该路径
+                .defaultSuccessUrl("/design", true)
+                // 指定默认的成功页, true --> 无论任何页面,登录后都跳转到"/design"
+
                 .and()
                 .logout()
-                .logoutSuccessUrl("/")
-                // end::enableLogout[]
+                .logoutSuccessUrl("/login")
+                // 指定默认退出登录的路径, session将会被清理
 
                 // Make H2-Console non-secured; for debug purposes
-                // tag::csrfIgnore[]
                 .and()
                 .csrf()
                 .ignoringAntMatchers("/h2-console/**")
-                // end::csrfIgnore[]
 
-                // Allow pages to be loaded in frames from the same origin; needed for H2-Console
-                // tag::frameOptionsSameOrigin[]
                 .and()
                 .headers()
                 .frameOptions()
-                .sameOrigin()
-        // end::frameOptionsSameOrigin[]
-
-        //tag::authorizeRequests[]
-        //tag::customLoginPage[]
-        ;
+                .sameOrigin();
     }
 
     @Bean
@@ -71,12 +69,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth)throws Exception{
 
+        /* encoder()带有@Bean注解,
+         * 它将用来在Spring应用上下文中声明PasswordEncoder bean,
+         * 对于encoder()的任何调用都会被拦截,并且返回应用上下文的bean实例
+         * */
         auth.userDetailsService(userDetailsService)
                 .passwordEncoder(encoder());
-                /* encoder()带有@Bean注解,
-                * 它将用来在Spring应用上下文中声明PasswordEncoder bean,
-                * 对于encoder()的任何调用都会被拦截,并且返回应用上下文的bean实例
-                * */
+
 
         //        // 基于内存的用户存储
 //        auth.inMemoryAuthentication() // 用inMemoryAuthentication()指定用户信息
