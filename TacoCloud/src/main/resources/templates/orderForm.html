@@ -2,12 +2,18 @@
 <html lang="en"
       xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <title>Taco Cloud</title>
     <link rel="stylesheet" th:href="@{css/styles.css}" />
 </head>
 
 <body>
+
+    <form method="POST" th:action="@{/logout}" id="logoutForm">
+        <input type="submit" value="Logout"/>
+    </form>
+
     <form method="POST" th:action="@{/orders}" th:object="${order}">
 
         <h1>Order your taco creations!</h1>
@@ -23,10 +29,6 @@
                 Please correct the problems below and resubmit.
             </span>
         </div>
-
-        <form method="POST" th:action="@{/logout}" id="logoutForm">
-            <input type="submit" value="Logout"/>
-        </form>
 
         <h3>Deliver my taco masterpieces to ...</h3>
         <label for="deliveryName">Name:</label>
@@ -103,6 +105,7 @@
         <br/>
 
         <input type="submit" value="Submit order" />
+
     </form>
 </body>
 </html>

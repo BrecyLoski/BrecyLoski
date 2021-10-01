@@ -69,12 +69,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth)throws Exception{
 
-        /* encoder()带有@Bean注解,
+        // 将自定义的用户详情服务与Spring Security配置在一起
+        auth.userDetailsService(userDetailsService)
+                .passwordEncoder(encoder());/* encoder()带有@Bean注解,
          * 它将用来在Spring应用上下文中声明PasswordEncoder bean,
          * 对于encoder()的任何调用都会被拦截,并且返回应用上下文的bean实例
          * */
-        auth.userDetailsService(userDetailsService)
-                .passwordEncoder(encoder());
 
 
         //        // 基于内存的用户存储
@@ -120,6 +120,5 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //                        .root("dc=tacocloud,dc=com") // 指定嵌入式LDAP服务器
 //                        .ldif("classpath:users.ldif"); // 指定加载LDIF文件
 
-        // 将自定义的用户详情服务与Spring Security配置在一起
     }
 }
