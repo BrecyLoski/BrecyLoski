@@ -46,9 +46,12 @@ public class OrderController {
                                Errors errors,
                                SessionStatus sessionStatus,
                                @AuthenticationPrincipal User user){
-        // @Valid 注解: Spring MVC要对提交的Order对象进行检查
-        // 如果存在校验错误,错误信息将会捕获到一个Errors对象,并作为参数传递给processOrder()
-
+        /* @Valid 注解: Spring MVC要对提交的Order对象进行检查
+        * 如果存在校验错误,错误信息将会捕获到一个Errors对象,并作为参数传递给processOrder()
+        * */
+        /* @AuthenticationPrincipal 注解: 将方法变成认证的Principal
+        * 将已认证的用户信息注入到控制器中(由User类型参数接收)
+        * */
         if(errors.hasErrors()) {
             return "orderForm";
         } // 检查Errors对象是否包含错误信息
