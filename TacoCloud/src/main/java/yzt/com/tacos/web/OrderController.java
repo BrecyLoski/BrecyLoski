@@ -60,8 +60,9 @@ public class OrderController {
         // 表单提交的Order对象(同时也session中持有的Object对象)通过注入的OrderRepository的save()保存
         sessionStatus.setComplete();
         // 调用SessionStatus的setComplete()方法重置session
+
         return "redirect:/";
-        // "redirect:/" --<<Spring in Action>>
+
     }
 
 }
