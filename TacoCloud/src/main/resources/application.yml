@@ -1,0 +1,21 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    #   com.mysql.cj.jdbc.Driver 是 mysql-connector-java 6中的 (用于 MySQL 5.0 以上版本),
+    #   需要指定时区 serverTimezone
+    url: jdbc:mysql://localhost:3306/tacocloud_master?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8
+    username: root
+    password: 220616
+
+  jpa:
+    database: mysql
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+
+  thymeleaf:
+    chache: false
+    mode: HTML

@@ -1,55 +1,69 @@
 package com.yzt.tacos;
 
 import lombok.Data;
-
 import org.hibernate.validator.constraints.CreditCardNumber;
 import org.hibernate.validator.constraints.NotBlank;
 
+import javax.persistence.*;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.Pattern;
-
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 @Data
-public class Order {
+@Table(name = "orders")
+// 避免异常, order是MySQL中的关键字
+@Entity
+public class Order implements Serializable {
 
-    @NotBlank(message = "Name is required")
-    // 不使用@NotNull, 因为" "即不为空, @NotBlank表示不能为 空白字段
-    private String deliveryName;
+  private static final long serialVersionUID = 1L;
+  
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
+  
+  private Date placedAt;
+  
+  @ManyToOne
+  private User user;
+  
+  @NotBlank(message="Delivery name is required")
+  private String deliveryName;
+  
+  @NotBlank(message="Street is required")
+  private String deliveryStreet;
+  
+  @NotBlank(message="City is required")
+  private String deliveryCity;
+  
+  @NotBlank(message="State is required")
+  private String deliveryState;
+  
+  @NotBlank(message="Zip code is required")
+  private String deliveryZip;
 
-    @NotBlank( message = "Street is required")
-    private String deliveryStreet;
+  @CreditCardNumber(message="Not a valid credit card number")
+  private String ccNumber;
+  
+  @Pattern(regexp="^(0[1-9]|1[0-2])([\\/])([1-9][0-9])$",
+           message="Must be formatted MM/YY")
+  private String ccExpiration;
 
-    @NotBlank(message = "City is required")
-    private String deliveryCity;
+  @Digits(integer=3, fraction=0, message="Invalid CVV")
+  private String ccCVV;
 
-    @NotBlank(message = "State is required")
-    private String deliveryState;
-
-    @NotBlank(message = "Zip is required")
-    private String deliveryZip;
-
-    @CreditCardNumber(message = "Not a valid credit card number")
-    private String ccNumber;
-
-    @Pattern(regexp="^(0[1-9]|1[0-2])([\\/])([1-9][0-9])$",
-             message = "Must be formatted MM/YY")
-    // "Pattern - 样式", 使用正则表达式, 确保其符合预期的格式
-    private String ccExpiration;
-
-    @Digits(integer = 3, fraction = 0, message = "Invalid CVV")
-    // "Digit - 数字/位", 确保包含3个整数, 并且没有分数
-    private String ccCVV;
-
-    private Long id;
-
-    private Date placeAt;
-
-    private List<Taco> tacos = new ArrayList<>();
-
-    public void addDesign(Taco design) {
-        this.tacos.add(design);
-    }
+  @ManyToMany(targetEntity=Taco.class)
+  private List<Taco> tacos = new ArrayList<>();
+  
+  public void addDesign(Taco design) {
+    this.tacos.add(design);
+  }
+  
+  @PrePersist
+  void placedAt() {
+    this.placedAt = new Date();
+  }
+  
 }
