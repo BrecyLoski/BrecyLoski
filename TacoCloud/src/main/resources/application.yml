@@ -12,9 +12,11 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: update
+      # create/update
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+        # 方言: MySQL 5.0 以上版本 ↑
 
   thymeleaf:
     chache: false
