@@ -1,0 +1,26 @@
+spring:
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+      # create/update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.H2Dialect
+
+
+  thymeleaf:
+    cache: false
+    # 禁用缓存
+    mode: HTML
+
+
+server:
+  port: 8443
+  # 将server.port属性显式设置为0,它会任选一个端口
+  ssl: # 浏览器会警告 与此站点的连接不安全
+    key-store: classpath:static/mykeys.jks
+    # keytool -keystore mykeys.jks -genkey -alias tomcat -keyalg RSA
+    # 可以使用 file://URL 或者 classpath:URL ,需要打包成JAR文件时, 使用classpath:
+    key-store-password: TacoCloud
+    key-password: TacoCloud
