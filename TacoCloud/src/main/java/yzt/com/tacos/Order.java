@@ -29,7 +29,7 @@ public class Order implements Serializable {
     @GeneratedValue (strategy = GenerationType.AUTO) // 依赖数据库自动生成的ID值
     private Long id;
 
-    private Date placeAt;
+    private Date placedAt;
 
     @ManyToOne // 多对一, 一个用户可以拥有多个订单
     private User user;
@@ -73,6 +73,6 @@ public class Order implements Serializable {
     @PrePersist
     // 在持久化之前, 使用placedAt()设置当前日期和时间
     void placedAt() {
-        this.placeAt = new Date();
+        this.placedAt = new Date();
     }
 }

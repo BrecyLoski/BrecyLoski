@@ -36,3 +36,8 @@ logging:
 # 使用特定的属性值:
 #greeting:
 #  welcome: You are using ${spring.application.name}.
+
+
+taco:
+  orders:
+    pageSize: 10

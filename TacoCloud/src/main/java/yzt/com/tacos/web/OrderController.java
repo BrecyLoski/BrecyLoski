@@ -3,6 +3,8 @@ package yzt.com.tacos.web;
 
 import javax.validation.Valid;
 
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import yzt.com.tacos.User;
 import yzt.com.tacos.data.OrderRepository;
@@ -15,29 +17,39 @@ import yzt.com.tacos.Order;
 import org.springframework.web.bind.support.SessionStatus;
 
 
-//@Slf4j
-// 在运行期创建一个SLF4J logger对象
+//@Slf4j // 在运行期创建一个SLF4J logger对象
 @Controller
-@RequestMapping(value = "/orders")
-// 指明这个控制器的请求处理方法都会处理路径以"/orders"开头的请求
-@SessionAttributes("order")
-// 指定模型对象(如订单属性)要保存在session中, 这样才能跨请求使用
+@RequestMapping(value = "/orders") // 指明这个控制器的请求处理方法都会处理路径以"/orders"开头的请求
+@SessionAttributes("order") // 指定模型对象(如订单属性)要保存在session中, 这样才能跨请求使用
 public class OrderController {
 
     private OrderRepository orderRepo;
+    private OrderProps props;
 
     @Autowired
-    public OrderController(OrderRepository orderRepo){
+    public OrderController(OrderRepository orderRepo, OrderProps props){
         this.orderRepo = orderRepo;
+        this.props = props;
     }
 
     @GetMapping(value = "/current")
     // 处理针对"/orders/current"的HTTP GET请求
     public String orderForm(Model model){
+
         //model.addAttribute("order", new Order());
-        return "orderForm";
-        // 返回一个名为"orderForm"的逻辑视图名
+        return "orderForm"; // 返回一个名为"orderForm"的逻辑视图名
         // orderForm 视图 由名为 orderForm.html 的 Thymeleaf 模板提供
+    }
+
+    @GetMapping
+    public String ordersForUser(@AuthenticationPrincipal User user,
+                                Model model){
+
+        Pageable pageable = PageRequest.of(0, props.getPageSize());
+        model.addAttribute("orders",
+                            orderRepo.findByUserOrderByPlacedAtDesc(user, pageable));
+
+        return "orderList";
     }
 
     @PostMapping

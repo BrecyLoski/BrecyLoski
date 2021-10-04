@@ -1,7 +1,9 @@
 package yzt.com.tacos.data;
 
+import org.springframework.data.domain.Pageable;
 import yzt.com.tacos.Order;
 import org.springframework.data.repository.CrudRepository;
+import yzt.com.tacos.User;
 
 import java.util.List;
 
@@ -17,6 +19,9 @@ import java.util.List;
 * */
 public interface OrderRepository extends CrudRepository<Order, Long> {
 
-    // 获取投递到指定邮编Zip
-    List<Order> findByDeliveryZip(String deliveryZip);
+    List<Order> findByUserOrderByPlacedAtDesc(User user, Pageable pageable);
+    /* 查找User, 根据PlacedAt 降序排序
+     * org.springframework.data.domain.Pageable:
+     * Spring Data 根据页号和每页数量选取子集的一种方法
+     * */
 }
