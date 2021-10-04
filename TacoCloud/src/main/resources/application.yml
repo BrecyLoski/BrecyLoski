@@ -33,3 +33,6 @@ logging:
     org:springframework:security: DEBUG
     # Spring Security 的日志级别设置为 DEBUG
 
+# 使用特定的属性值:
+#greeting:
+#  welcome: You are using ${spring.application.name}.
