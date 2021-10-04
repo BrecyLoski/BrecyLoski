@@ -1,12 +1,4 @@
-thymeleaf:
-  chache: false
-  mode: HTML
-
-
----
 spring:
-  profiles: prod
-
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     #   com.mysql.cj.jdbc.Driver 是 mysql-connector-java 6中的 (用于 MySQL 5.0 以上版本),
@@ -25,6 +17,17 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.MySQL5InnoDBDialect
         # 方言: MySQL 5.0 以上版本 ↑
+
+server:
+  port: 8443
+  ssl:
+    key-store: classpath:static/mykeys.jks
+    key-store-password: TacoCloud
+    key-password: TacoCloud
+
+thymeleaf:
+  chache: false
+  mode: HTML
 
 logging:
   level:
