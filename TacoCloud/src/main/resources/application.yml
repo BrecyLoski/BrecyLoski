@@ -43,5 +43,17 @@ logging:
 taco:
   orders:
     pageSize: 10
-#   在src/main/resource/META-INF下创建自定义配置属性的元数据additional-spring-configuration.json
+# 配置属性元数据: 在src/main/resource/META-INF下创建自定义配置属性的元数据additional-spring-configuration.json
 # Spring Boot 灵活的属性命名功能允许属性名出现不同的变种, taco.orders.page-size = taco.orders.pageSize
+
+
+
+
+# 以上属性是所有 profiles通用的, 如果当前激活 profiles 没有设置以上属性, 以上属性将作为默认值
+---
+# Spring profiles 条件化配置: (仅适用于 prod profiles)
+spring:
+  profiles: prod
+  # 使用 spring.profiles属性来命名 profile
+
+
