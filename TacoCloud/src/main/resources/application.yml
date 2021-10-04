@@ -1,4 +1,17 @@
 spring:
+  jpa:
+    show-sql: true
+
+thymeleaf:
+  chache: false
+  mode: HTML
+
+
+
+---
+spring:
+  profiles: prod
+
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     #   com.mysql.cj.jdbc.Driver 是 mysql-connector-java 6中的 (用于 MySQL 5.0 以上版本),
@@ -7,17 +20,17 @@ spring:
     username: root
     password: 220616
 
-  jpa:
-    database: mysql
-    show-sql: true
+jpa:
+  database: mysql
+  show-sql: false
+  hibernate:
+    ddl-auto: update
+    # create/update
+  properties:
     hibernate:
-      ddl-auto: update
-      # create/update
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
-        # 方言: MySQL 5.0 以上版本 ↑
+      dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+      # 方言: MySQL 5.0 以上版本 ↑
 
-  thymeleaf:
-    chache: false
-    mode: HTML
+logging:
+  level:
+    tacos: WARN
