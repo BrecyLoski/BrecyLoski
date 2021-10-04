@@ -56,4 +56,23 @@ spring:
   profiles: prod
   # 使用 spring.profiles属性来命名 profile
 
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    # mysql --version 8.0.25
+    url: jdbc:mysql://localhost:3306/tacocloud_mysql?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8
+    # mysql --version 8.0.25 (需设置时区)
+    username: root
+    password: 220616
+
+  jpa:
+    show-sql: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+        # mysql --version 8.0.25
+
+logging:
+  level:
+    tacos: WARN
+
 
