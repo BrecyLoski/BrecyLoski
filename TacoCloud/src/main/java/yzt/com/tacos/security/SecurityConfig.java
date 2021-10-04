@@ -21,7 +21,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired // 自动装配
     //DataSource dataSource;
-    private UserDetailsService userDetailsService;
+    private UserRepositoryUserDetailsService userDetailsService;
 
     @Override
     // 配置HttpSecurity  ---拦截请求以确保用户具备适当的权限
@@ -77,7 +77,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
          * */
 
 
-        //        // 基于内存的用户存储
+          // 基于内存的用户存储
 //        auth.inMemoryAuthentication() // 用inMemoryAuthentication()指定用户信息
 //                .withUser("bryce") // 给定 用户名
 //                    .password("{noop}TacoCloud") // 指定 密码存储格式为{noop}的密码

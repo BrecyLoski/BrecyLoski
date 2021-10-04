@@ -1,18 +1,20 @@
 spring:
   jpa:
     show-sql: true
+    # 显示 SQL 语句
     hibernate:
       ddl-auto: update
       # create/update
     properties:
       hibernate:
         dialect: org.hibernate.dialect.H2Dialect
+        # 设置方言
 
 
-  thymeleaf:
-    cache: false
-    # 禁用缓存
-    mode: HTML
+thymeleaf:
+  cache: false
+  # 禁用缓存
+  mode: HTML
 
 
 server:
@@ -41,3 +43,5 @@ logging:
 taco:
   orders:
     pageSize: 10
+#   在src/main/resource/META-INF下创建自定义配置属性的元数据additional-spring-configuration.json
+# Spring Boot 灵活的属性命名功能允许属性名出现不同的变种, taco.orders.page-size = taco.orders.pageSize
