@@ -24,3 +24,12 @@ server:
     # 可以使用 file://URL 或者 classpath:URL ,需要打包成JAR文件时, 使用classpath:
     key-store-password: TacoCloud
     key-password: TacoCloud
+
+
+logging:
+  level:
+    root: INFO
+    # logger -> root 的 logging 级别设置为 WARN
+    org:springframework:security: DEBUG
+    # Spring Security 的日志级别设置为 DEBUG
+
