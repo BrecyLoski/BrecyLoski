@@ -18,6 +18,6 @@ public class WebConfig implements WebMvcConfigurer{
         * 基于该对象调用setViewName()方法, 指明请求"/"时转发到"home"视图上
         * */
         registry.addViewController("/abc").setViewName("home");
-        registry.addViewController("/login");
+        registry.addViewController("/login").setViewName("/login");
     }
 }

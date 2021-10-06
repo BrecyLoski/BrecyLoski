@@ -1,4 +1,7 @@
 spring:
+#  profiles:
+#    active: prod
+
   jpa:
     show-sql: true
     # 显示 SQL 语句
@@ -29,6 +32,8 @@ server:
 
 
 logging:
+  #path:
+  #file:
   level:
     root: INFO
     # logger -> root 的 logging 级别设置为 WARN
@@ -73,6 +78,6 @@ spring:
 
 logging:
   level:
-    tacos: WARN
+    root: WARN
 
 
