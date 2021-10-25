@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: config-server
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/BryceLoski21/Spring/tree/taco_cloud_mine
+          search-paths: yml,*
+
+server:
+  port: 8888
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka1.tacocloud.com:8761/eureka

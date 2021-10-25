@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: registry-server
+
+  cloud:
+    config:
+      uri: http://eureka1.tacocloud.com:8888
