@@ -6,18 +6,22 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="registry_server" />
         <module name="config_server" />
+        <module name="registry_server" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="config_server" target="1.8" />
+      <module name="registry-server" target="1.8" />
       <module name="registry_server" target="1.8" />
+      <module name="RegistryServer" target="1.8" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="RegistryServer" options="-parameters" />
       <module name="config_server" options="-parameters" />
+      <module name="registry-server" options="-parameters" />
       <module name="registry_server" options="-parameters" />
     </option>
   </component>

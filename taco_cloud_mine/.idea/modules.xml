@@ -3,7 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/config_server/config_server.iml" filepath="$PROJECT_DIR$/config_server/config_server.iml" />
-      <module fileurl="file://$PROJECT_DIR$/demo/registry_server.iml" filepath="$PROJECT_DIR$/demo/registry_server.iml" />
+      <module fileurl="file://$PROJECT_DIR$/registry_server/registry_server.iml" filepath="$PROJECT_DIR$/registry_server/registry_server.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/taco_cloud_mine.iml" filepath="$PROJECT_DIR$/.idea/taco_cloud_mine.iml" />
     </modules>
   </component>
