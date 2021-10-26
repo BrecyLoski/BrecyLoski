@@ -1,7 +1,3 @@
-#  cloud:
-#    config:
-#      uri: http://eureka1.tacocloud.com:8888
-
 eureka:
   client:
 #    fetch-registry: true
