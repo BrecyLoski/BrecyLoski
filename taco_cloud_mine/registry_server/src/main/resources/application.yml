@@ -2,8 +2,8 @@ eureka:
   client:
 #    fetch-registry: true
 #    register-with-eureka: true
-    service-url:
-      default-zone: http://${other.eureka.host}:${other.eureka.port}/eureka
+    serviceUrl:
+      defaultZone: http://${other.eureka.host}:${other.eureka.port}/eureka
   server:
     enable-self-preservation: false
 
